@@ -1,2 +1,1 @@
-# Shop
-上上城
+## Shop Web Project
