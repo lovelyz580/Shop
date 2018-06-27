@@ -25,6 +25,10 @@ public class UserController {
     public ModelAndView loginForm(){
         System.out.println("框架貌似搭建好了！");
         System.out.println("hahaha");
+        System.out.println("框架貌似搭建好了！");
+        System.out.println("hahaha");
+        System.out.println("框架貌似搭建好了！");
+        System.out.println("hahaha");
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("user/login");
         return modelAndView;
