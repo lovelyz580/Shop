@@ -23,6 +23,7 @@ public class UserController {
      */
     @RequestMapping(value = "/login",method = RequestMethod.GET)
     public ModelAndView loginForm(){
+        System.out.println("框架貌似搭建好了！");
         System.out.println("hahaha");
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("user/login");
