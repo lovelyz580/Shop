@@ -22,26 +22,26 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
         HttpSession session = request.getSession();
         String url = request.getRequestURI();
         //放行exceptUrls中配置的url
-        for (String oneUrl:exceptUrls) {
-            if(url.endsWith("/**")){
-                if (url.startsWith(oneUrl.substring(0, url.length() - 3))) {
+        if (exceptUrls != null) {
+            for (String oneUrl : exceptUrls) {
+                if (url.endsWith("/**")) {
+                    if (url.startsWith(oneUrl.substring(0, url.length() - 3))) {
+                        return true;
+                    }
+                } else if (url.startsWith(oneUrl)) {
                     return true;
                 }
-            } else if (url.startsWith(oneUrl)) {
-                return true;
             }
         }
         if (session.getAttribute(SessionKey.LOGIN_USER_INFO) == null) {
-//            System.out.println(url);
-            if (url.equals(request.getContextPath()+"/user/login")) {
+            if (url.equals(request.getContextPath() + "/user/login")) {
                 return true;
             } else {
-                request.getSession().setAttribute("markUrl",url);
-                response.sendRedirect(request.getContextPath()+"/user/login");
+                request.getSession().setAttribute("markUrl", url);
+                response.sendRedirect(request.getContextPath() + "/user/login");
                 return false;
             }
 

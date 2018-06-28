@@ -5,11 +5,10 @@ public class JsonResponse<T> {
     private String msg;  //信息
     private T data;
 
-    public JsonResponse(){
+    public JsonResponse() {
         this.error = true;
         this.msg = "出错啦！！";
     }
-
 
 
     public Boolean getError() {

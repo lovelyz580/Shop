@@ -20,17 +20,14 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
-    /**
-     * 获得用户
-     * @return 单个用户实体
-     */
+
     @Override
     public User getUser(User user) {
         UserExample userExample = new UserExample();
         UserExample.Criteria criteria = userExample.createCriteria();
         criteria.andNameEqualTo(user.getName()).andPasswordEqualTo(user.getPassword());
         List<User> users = userMapper.selectByExample(userExample);
-        if(users!=null) {
+        if (users != null) {
             return users.get(0);
         }
         return null;
@@ -38,25 +35,22 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    /**
-     * 登录操作
-     * @return 登录状态信息
-     */
+
     @Override
     public JsonResponse login(User user, HttpSession session) {
         User theUser = getUser(user);
-        JsonResponse <Map<String,Object>>jsonResponse = new JsonResponse<>();
+        JsonResponse<Map<String, Object>> jsonResponse = new JsonResponse<>();
 
-        if(theUser!=null){
-            session.setAttribute(SessionKey.LOGIN_USER_INFO,user);
+        if (theUser != null) {
+            session.setAttribute(SessionKey.LOGIN_USER_INFO, user);
             jsonResponse.setError(false);
             jsonResponse.setMsg("登录成功");
-            Map<String,Object> dataMap = new HashMap<>();
-            dataMap.put("user",user);
-            dataMap.put("markUrl",session.getAttribute("markUrl"));
+            Map<String, Object> dataMap = new HashMap<>();
+            dataMap.put("user", user);
+            dataMap.put("markUrl", session.getAttribute("markUrl"));
             jsonResponse.setData(dataMap);
 
-        }else{
+        } else {
             jsonResponse.setMsg("登录失败，失败原因：用户名或者密码错误");
         }
         return jsonResponse;
